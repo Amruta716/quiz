@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  width: 80%;
+  margin: auto;
+  padding: 1rem;
+  background-color: burlywood;
+}
+
+main > div {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+main > div > p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+main > .crct > h3 {
+  background-color: greenyellow;
+  font-size: 1.2rem;
+}
+
+main > .wrong > h3 {
+  background-color: red;
+  font-size: 1.2rem;
+}
+/* header {
+
+} */
+header > h1 {
+  padding: 1rem;
+  /* font-size: 1.5rem; */
+}
+header > h1 > span {
+  color: aqua;
+}
+
+header > h2 {
+  padding-left: 1rem;
+}
+header > h2 > span {
+  color: aqua;
+  margin-left: 1rem;
+}
+
+#outerDiv {
+  width: 70%;
+  background-color: red;
+  height: 2rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  border-radius: 20px;
+  border: none;
+}
+
+#innerDiv {
+  height: 2rem;
+  width: 0%;
+  background-color: greenyellow;
+  border-radius: 20px;
+  position: relative;
+}
+#innerDiv > span {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  color: black;
+  /* display: none; */
+}

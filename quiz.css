@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+body {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  border-bottom: 5px solid rgb(230, 224, 224);
+}
+main {
+  display: grid;
+  grid-template-columns: 35% 35% 30%;
+}
+#question-cont {
+  padding-top: 0.2em;
+  padding-left: 1rem;
+  border-right: 3px solid rgb(224, 220, 220);
+}
+#question-cont > h2 {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+#actual-question {
+  padding-left: 2rem;
+}
+
+#option-cont {
+  padding: 0.2rem 1rem;
+}
+#btn-cont {
+  padding: 0.2rem 1rem;
+  background-color: rgb(220, 244, 154);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#legends {
+  display: grid;
+  grid-template-columns: repeat(2, 40%);
+}
+#legends > h3 > span {
+  margin-right: 0.5rem;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: 90% 10%;
+  border-top: 3px solid rgb(220, 211, 211);
+  padding: 0.5rem 1rem;
+}
+footer button {
+  padding: 1rem;
+  border: none;
+  background-color: rgb(244, 138, 58);
+  color: white;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+}
+footer button:active {
+  background-color: black;
+}
+#actual-btn {
+  display: grid;
+  grid-template-columns: repeat(5, 17%);
+  gap: 1rem;
+}
+#actual-btn > button {
+  padding: 0.5rem;
+  border: none;
+  background-color: white;
+  border-radius: 5px;
+}
+#actual-btn > button:active {
+  background-color: royalblue;
+  color: white;
+}
+#actual-option {
+  display: grid;
+  grid-template-columns: repeat(2, 25%);
+  gap: 2rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+#actual-option > input {
+  height: 1rem;
+}
