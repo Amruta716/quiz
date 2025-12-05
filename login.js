@@ -1,60 +1,40 @@
 let form = document.querySelector("form");
-let userName = document.querySelectorAll("input")[0];
-let password = document.querySelectorAll("input")[1];
+let userName = document.querySelector("#username");
+let password = document.querySelector("#password");
 
-let euser = document.querySelectorAll("span")[0];
-let epass = document.querySelectorAll("span")[1];
-let eform = document.querySelectorAll("span")[2];
+let euser = document.querySelectorAll("span")[0]; // username error
+let epass = document.querySelectorAll("span")[1]; // password error
+let eform = document.querySelectorAll("span")[2]; // match error
 
-let datafromstorage = JSON.parse(localStorage.getItem("details"));
-
-console.log(form, userName, password, euser, epass, eform);
+let datafromstorage = JSON.parse(localStorage.getItem("details")) || [];
 
 form.addEventListener("submit", (e) => {
+  e.preventDefault(); // prevent default navigation
+
   euser.innerHTML = "";
   epass.innerHTML = "";
-  eform.innerHTML = "";
+  // eform.innerHTML = "";
 
-  //! Match data
-
-  // e.preventDefault();
-  let matchdata = datafromstorage.find((e) => {
-    if (
-      (e.phone == userName.value && e.password == password.value) ||
-      (e.email == userName.value && e.pass == password.value)
-    ) {
-      return e;
-    }
-  });
-  console.log(matchdata);
-
-  if (userName.value == "" && password.value == "") {
+  if (!userName.value) {
     euser.innerHTML = "Enter the email or phone no";
-    epass.innerHTML = "Enter the password";
-    e.preventDefault();
-  } else if (userName.value == "") {
-    euser.innerHTML = "Enter the email or phone no";
-    e.preventDefault();
-  } else if (password.value == "") {
-    epass.innerHTML = "Enter the password";
-    e.preventDefault();
-  } else if (matchdata) {
-    alert("Welcome to the page");
-    localStorage.setItem("quizuser", JSON.stringify(matchdata));
-  } else {
-    eform.innerHTML = "Match not found";
-    e.preventDefault();
+    return;
   }
-});
+  if (!password.value) {
+    epass.innerHTML = "Enter the password";
+    return;
+  }
 
-let h3 = document.querySelector("h3");
+  let matchdata = datafromstorage.find(
+    (e) =>
+      (e.phone === userName.value && e.pass === password.value) ||
+      (e.email === userName.value && e.pass === password.value)
+  );
 
-h3.addEventListener("click", () => {
-  if (h3.innerHTML == "show") {
-    password.type = "text";
-    h3.innerHTML = "hide";
+  if (matchdata) {
+    localStorage.setItem("quizuser", JSON.stringify(matchdata));
+    alert("Login successful!");
+    window.location.href = "./quiz.html"; // redirect to quiz
   } else {
-    h3.innerHTML = "show";
-    password.type = "hide";
+    eform.innerHTML = "User not found or password incorrect";
   }
 });

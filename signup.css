@@ -2,37 +2,105 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #7f7fd5, #86a8e7, #91eae4);
 }
 
 form {
-  width: 20%;
-  margin: auto;
-  padding: 1rem;
-  background-color: rgb(177, 161, 192);
-  border-radius: 5px;
-  margin-top: 2rem;
+  width: 100%;
+  max-width: 450px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-input,
-label,
-button {
-  display: block;
-  /* align-items: center;
-    justify-content: center; */
-  margin-top: 0.2rem;
-  width: 180px;
+.input-group {
+  position: relative;
+  margin-top: 1.5rem;
+  width: 100%;
 }
-button {
-  background-color: black;
-  color: white;
-  height: 1.5rem;
-  margin-top: 1rem;
-  border-radius: 5px;
-  width: 180px;
+
+input {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
-button:active {
-  background-color: rgb(63, 102, 211);
+
+input:focus {
+  border-color: #5a67d8;
+  box-shadow: 0 0 8px rgba(90, 103, 216, 0.4);
 }
+
+/* Floating label effect */
+label {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  background: transparent;
+  color: #555;
+  padding: 0 4px;
+  transition: 0.3s ease all;
+  pointer-events: none;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 5px;
+  font-size: 0.8rem;
+  color: #5a67d8;
+  background: white;
+}
+
+/* Error message */
 span {
-  color: red;
+  display: block;
+  color: #e53e3e;
+  font-size: 0.85rem;
+  margin-top: 0.3rem; /* spacing below input */
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #5a67d8;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #434aa8;
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: #2f3278;
+  transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  form {
+    width: 90%;
+    padding: 1.5rem;
+  }
 }

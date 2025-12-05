@@ -1,50 +1,118 @@
+/* Reset and box-sizing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
+/* Body background and center form */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #7f7fd5, #86a8e7, #91eae4);
+  font-size: 16px;
+}
+
+/* Form styling */
 form {
-  width: 20%;
-  margin: auto;
-  padding: 1rem;
-  background-color: rgb(177, 161, 192);
-  border-radius: 5px;
-  margin-top: 2rem;
-}
-
-input,
-button {
-  display: block;
-  /* align-items: center;
-      justify-content: center; */
-  margin-top: 0.2rem;
-  width: 180px;
-}
-button {
-  background-color: black;
-  color: white;
-  height: 1.5rem;
-  margin-top: 1rem;
-  border-radius: 5px;
-  width: 180px;
-}
-button:active {
-  background-color: rgb(63, 102, 211);
-}
-span {
-  color: red;
-}
-h3 {
-  margin: 0;
-  margin-top: 0.8%;
-  padding: 0;
-  font-size: 0.7rem;
-  position: absolute;
-  top: 0%;
-  right: 36%;
-}
-
-#show {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   position: relative;
+  transition: transform 0.3s ease;
+}
+
+form:hover {
+  transform: translateY(-5px);
+}
+
+/* Input styling */
+input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+  border-color: #5a67d8;
+  box-shadow: 0 0 8px rgba(90, 103, 216, 0.4);
+  outline: none;
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #5a67d8;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #434aa8;
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: #2f3278;
+  transform: scale(0.98);
+}
+
+/* Error message styling */
+span {
+  display: block;
+  color: #e53e3e;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+/* Interactive show/hide password */
+#show {
+  font-size: 0.85rem;
+  color: #5a67d8;
+  cursor: pointer;
+  position: absolute;
+  top: 20%;
+  right: 1rem;
+  user-select: none;
+  transition: color 0.3s;
+}
+
+#show:hover {
+  color: #434aa8;
+}
+
+/* Labels (optional) */
+label {
+  margin-top: 0.8rem;
+  display: block;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  form {
+    width: 90%;
+    padding: 1.5rem;
+  }
+  input,
+  button {
+    width: 100%;
+  }
 }

@@ -1,19 +1,14 @@
-// !store data of login and signup
 let details = JSON.parse(localStorage.getItem("details"));
 let quizuser = JSON.parse(localStorage.getItem("quizuser"));
 let body = document.querySelector("body");
-console.log(details, quizuser);
 
-if (quizuser) {
-  if (quizuser.quiz) {
-    body.innerHTML = `test already completed to see result <a href="./result.html">Click here</a>`;
-  } else {
-    main();
-  }
-} else {
-  alert(" Login First");
-
+if (!quizuser) {
+  alert("Login First");
   window.location.href = "./login.html";
+} else if (quizuser.quiz) {
+  body.innerHTML = `Test already completed. See result <a href="./result.html">Click here</a>`;
+} else {
+  main(); // call main quiz function only if logged in
 }
 
 function main() {

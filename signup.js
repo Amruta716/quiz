@@ -1,118 +1,58 @@
 let form = document.querySelector("form");
-let firstname = document.querySelectorAll("input")[0];
-let lastname = document.querySelectorAll("input")[1];
-let email = document.querySelectorAll("input")[2];
-let mobile = document.querySelectorAll("input")[3];
-let createpassword = document.querySelectorAll("input")[4];
-let confirmpassword = document.querySelectorAll("input")[5];
+let inputs = document.querySelectorAll("input");
+let spans = document.querySelectorAll("span");
 
-let efirst = document.querySelectorAll("span")[0];
-let elast = document.querySelectorAll("span")[1];
-let eemail = document.querySelectorAll("span")[2];
-let emobile = document.querySelectorAll("span")[3];
-let epass = document.querySelectorAll("span")[4];
-let ecpass = document.querySelectorAll("span")[5];
-let storage = [];
-let datafromstorage = JSON.parse(localStorage.getItem("details"));
+let [firstname, lastname, email, mobile, createpassword, confirmpassword] =
+  inputs;
+let [efirst, elast, eemail, emobile, epass, ecpass] = spans;
 
-if (datafromstorage) {
-  storage = datafromstorage;
-}
-
-console.log(datafromstorage, storage);
-
-let regularexpression = /^[a-zA-Z]{1,17}$/;
-let regularexpression2 = /^[a-zA-Z0-9!@]{6,15}$/;
-let regularexpression1 = /^[6-9][0-9]{9}$/;
+let storage = JSON.parse(localStorage.getItem("details")) || [];
 
 form.addEventListener("submit", (e) => {
+  e.preventDefault();
   let flag = true;
 
-  if (firstname.value == "") {
-    efirst.innerHTML = `*ENTER FIRST NAME`;
+  // First Name
+  if (!firstname.value) {
+    efirst.innerHTML = "*ENTER FIRST NAME";
     flag = false;
-    e.preventDefault();
-  }
-  //If op is true then this block executed
-  else if (regularexpression.test(firstname.value)) {
-    efirst.innerHTML = "";
-  } else {
-    efirst.innerHTML = "Invalid First name";
-    flag = false;
-    e.preventDefault();
-  }
+  } else efirst.innerHTML = "";
 
-  //LAstNAme Validation
-  if (lastname.value == "") {
-    elast.innerHTML = `*ENTER LAST NAME`;
+  // Last Name
+  if (!lastname.value) {
+    elast.innerHTML = "*ENTER LAST NAME";
     flag = false;
-    e.preventDefault();
-  } else if (regularexpression.test(lastname.value)) {
-    elast.innerHTML = "";
-  } else {
-    elast.innerHTML = "Invalid Last Name";
-    flag = false;
-    e.preventDefault();
-  }
+  } else elast.innerHTML = "";
 
-  //Email Validation
-  if (email.value == "") {
-    eemail.innerHTML = `ENTER EMAIL`;
+  // Email
+  if (!email.value) {
+    eemail.innerHTML = "*ENTER EMAIL";
     flag = false;
-    e.preventDefault();
-  } else {
-    eemail.innerHTML = "";
-  }
+  } else eemail.innerHTML = "";
 
-  //Mobile Validation
-  let mobileCheck = storage.find((e) => {
-    if (e.phone == mobile.value) {
-      return e;
-    }
-  });
-
-  if (mobileCheck) {
-    emobile.innerHTML = "Mobile is already Registered";
+  // Mobile
+  if (!mobile.value) {
+    emobile.innerHTML = "*ENTER MOBILE";
     flag = false;
-    e.preventDefault();
-  } else if (mobile.value == "") {
-    emobile.innerHTML = "*ENTER MOBILE NUMBER";
+  } else if (storage.find((e) => e.phone === mobile.value)) {
+    emobile.innerHTML = "Mobile already registered";
     flag = false;
-    e.preventDefault();
-  } else if (regularexpression1.test(mobile.value)) {
-    emobile.innerHTML = "";
-  } else {
-    emobile.innerHTML = "Invalid Mobile Number";
-    flag = false;
-    e.preventDefault();
-  }
+  } else emobile.innerHTML = "";
 
-  //Password Validation
-
-  if (createpassword.value == "") {
+  // Password
+  if (!createpassword.value) {
     epass.innerHTML = "*ENTER PASSWORD";
     flag = false;
-    e.preventDefault();
-  } else if (regularexpression2.test(createpassword.value)) {
-    epass.innerHTML = "";
-  } else {
-    epass.innerHTML = "Invalid Password";
-    flag = false;
-    e.preventDefault();
-  }
+  } else epass.innerHTML = "";
 
-  //Confirm Password.
-  if (confirmpassword.value == "") {
-    ecpass.innerHTML = "*ENTER CONFIRM PASSWORD";
+  // Confirm Password
+  if (
+    !confirmpassword.value ||
+    confirmpassword.value !== createpassword.value
+  ) {
+    ecpass.innerHTML = "*Password does not match";
     flag = false;
-    e.preventDefault();
-  } else if (confirmpassword.value == createpassword.value) {
-    ecpass.innerHTML = "";
-  } else {
-    ecpass.innerHTML = "Password does not match which create password.";
-    flag = false;
-    e.preventDefault();
-  }
+  } else ecpass.innerHTML = "";
 
   if (flag) {
     let details = {
@@ -124,8 +64,8 @@ form.addEventListener("submit", (e) => {
       quiz: null,
     };
     storage.push(details);
-
     localStorage.setItem("details", JSON.stringify(storage));
-    console.log(details);
+    alert("Signup successful! Please login.");
+    window.location.href = "./login.html";
   }
 });
