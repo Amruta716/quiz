@@ -10,16 +10,24 @@
     <!-- <h2>Result Page</h2> -->
 
     <header>
-      <h1>Name: <span id="name"> </span></h1>
+      <h1>Test Completed Successfully 🎉</h1>
+      <h2>Name: <span id="name"> </span></h2>
       <h2>Score : <span id="score"> </span></h2>
-      <div id="outerDiv">
-        <div id="innerDiv">
-          <span id="marks"></span>
-        </div>
-      </div>
 
-      <main></main>
+      <!-- CIRCLE PROGRESS -->
+      <div class="circle">
+  <svg viewBox="0 0 160 160">
+    <circle cx="80" cy="80" r="70"></circle>
+    <circle id="progressCircle" cx="80" cy="80" r="70"></circle>
+  </svg>
+  <div class="percent" id="percentText">0%</div>
+</div>
+
+
+      <button id="viewBtn">View Answers</button>
     </header>
+
+    <main style="display: none"></main>
 
     <script src="./result.js"></script>
   </body>

@@ -1,54 +1,70 @@
 let quizuser = JSON.parse(localStorage.getItem("quizuser"));
 let userResult = quizuser.quiz;
-console.log(quizuser);
-
 let main = document.querySelector("main");
-let score = 0;
-userResult.map((e) => {
-  //! one way to write result without style
-  //   main.innerHTML += `
-  //     <p>${e.question}</p>
-  //     <h3>Your Answer:${e.userAnswer}</h3>
-  //     <h3>Correct Answer: ${e.crctAnswer}</h3>
-  //     `;
+let viewBtn = document.querySelector("#viewBtn");
 
-  //! second way to achieve result using style
+let score = 0;
+
+// CREATE RESULT BLOCKS
+userResult.forEach((e) => {
   let div = document.createElement("div");
-  main.append(div);
-  if (e.userAnswer == e.crctAnswer) {
+
+  if (e.userAnswer === e.crctAnswer) {
     div.className = "crct";
     score++;
   } else {
     div.className = "wrong";
   }
-  let p = document.createElement("p");
-  p.innerHTML = e.question;
 
-  let h3 = document.createElement("h3");
-  h3.innerHTML = `Your Answer:${e.userAnswer}`;
+  div.innerHTML = `
+    <p>${e.question}</p>
+    <h4>Your Answer: ${e.userAnswer}</h4>
+    <h5>Correct Answer: ${e.crctAnswer}</h5>
+  `;
 
-  let h4 = document.createElement("h4");
-  h4.innerHTML = `correct Answer :${e.crctAnswer}`;
-
-  div.append(p, h3, h4);
+  main.append(div);
 });
 
-let userName = document.querySelector("#name");
-let userScore = document.querySelector("#score");
-let innerDiv = document.querySelector("#innerDiv");
-let width = 0;
-let marks = document.querySelector("#marks");
+// PERCENTAGE
+let percent = Math.round((score / userResult.length) * 100);
 
-userName.innerHTML = quizuser.first;
-userScore.innerHTML = `${score}/${userResult.length}`;
+// NAME & SCORE
+document.querySelector("#name").innerText = quizuser.first;
+document.querySelector("#score").innerText = `${score}/${userResult.length}`;
 
-let percentage = setInterval(() => {
-  width++;
-  innerDiv.style.width = `${width}%`;
-  if (width >= (score / userResult.length) * 100) {
-    clearInterval(percentage);
+// MESSAGE ACCORDING TO SCORE
+let msg = document.querySelector("header h1");
 
-    marks.innerHTML = `${((score / userResult.length) * 100).toFixed(2)}%`;
-    marks.style.display = "block";
+if (percent >= 80) msg.innerText = "🔥 Excellent Performance!";
+else if (percent >= 60) msg.innerText = "✅ Good Job!";
+else if (percent >= 40) msg.innerText = "🙂 Keep Practicing";
+else msg.innerText = "😟 Try Again";
+
+// CIRCLE PROGRESS
+let circle = document.querySelector("#progressCircle");
+let percentText = document.querySelector("#percentText");
+
+let radius = 70;
+let circumference = 2 * Math.PI * radius;
+
+circle.style.strokeDasharray = circumference;
+
+// OFFSET CALCULATION
+let offset = circumference - (percent / 100) * circumference;
+
+// ANIMATION
+setTimeout(() => {
+  circle.style.strokeDashoffset = offset;
+  percentText.innerText = percent + "%";
+}, 300);
+
+// TOGGLE VIEW ANSWERS
+viewBtn.onclick = () => {
+  if (main.style.display === "none") {
+    main.style.display = "block";
+    viewBtn.innerText = "Hide Answers";
+  } else {
+    main.style.display = "none";
+    viewBtn.innerText = "View Answers";
   }
-}, 20);
+};

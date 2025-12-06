@@ -3,151 +3,153 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", system-ui, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-/* PAGE BACKGROUND */
+/* PAGE BACKGROUND (SAME AS LOGIN STYLE) */
 body {
-  background: linear-gradient(135deg, #667eea, #764ba2);
   min-height: 100vh;
+  background: linear-gradient(135deg, #7f7fd5, #86a8e7);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: 2rem 1rem;
+  align-items: center;
+  padding: 1rem;
 }
 
-/* MAIN CARD */
-main {
-  width: 100%;
-  max-width: 850px;
-  background: white;
-  padding: 2rem;
-  border-radius: 18px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-}
-
-/* HEADER */
+/* RESULT CARD */
 header {
-  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2.5rem;
 }
 
+/* HEADING TEXT */
 header h1 {
-  font-size: 1.7rem;
+  color: #444;
   margin-bottom: 0.5rem;
+  font-size: 1.4rem;
 }
 
 header h2 {
-  font-size: 1rem;
-  color: #0b0b0b;
+  color: #666;
+  font-size: 0.95rem;
 }
 
-header h1 span,
-header h2 span {
-  color: #e9e9eb;
-}
-
-/* PROGRESS BAR */
-#outerDiv {
-  width: 100%;
-  background: #e0e0e0;
-  height: 16px;
-  border-radius: 999px;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  overflow: hidden;
-}
-
-#innerDiv {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
-  border-radius: 999px;
-  transition: width 0.6s ease;
+/* CIRCLE CONTAINER */
+.circle {
+  width: 200px;
+  height: 200px;
+  margin: 1.5rem auto;
   position: relative;
 }
 
-#innerDiv span {
+/* SVG FIX */
+.circle svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* BASE CIRCLE */
+.circle svg circle:first-child {
+  fill: none;
+  stroke: #e3e6ff;
+  stroke-width: 12;
+}
+
+/* PROGRESS CIRCLE */
+#progressCircle {
+  fill: none;
+  stroke: #667eea;
+  stroke-width: 12;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset 1.2s ease;
+}
+
+/* PERCENT TEXT CENTERED */
+.percent {
   position: absolute;
-  right: 8px;
-  top: -26px;
-  font-size: 0.8rem;
-  color: #333;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #667eea;
 }
 
-/* QUESTION / RESULT BLOCK */
-main > div {
-  background: #f8f9fc;
-  padding: 1.2rem 1.5rem;
-  margin-bottom: 1.6rem;
-  border-radius: 12px;
-  border-left: 5px solid transparent;
-  transition: 0.3s ease;
+/* PERCENT TEXT */
+.percent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #667eea;
 }
 
-main > div:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-}
-
-/* QUESTION TEXT */
-main > div > p {
+/* BUTTON */
+#viewBtn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 10px;
   font-size: 1rem;
-  color: #333;
-  margin-bottom: 0.6rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: 0.3s;
 }
 
-/* CORRECT */
-main > .crct {
-  border-color: #4caf50;
+#viewBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(118, 75, 162, 0.4);
 }
 
-main > .crct > h3 {
-  background: #e8f5e9;
-  color: #2e7d32;
-  display: inline-block;
-  padding: 0.4rem 0.8rem;
-  font-size: 1rem;
-  border-radius: 6px;
+/* ANSWER SECTION */
+main {
+  margin-top: 1rem; /* space between result card and answers */
+  display: none;
 }
 
-/* WRONG */
-main > .wrong {
-  border-color: #f44336;
+main div {
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  background: #f6f7ff;
+  border-radius: 10px;
 }
 
-main > .wrong > h3 {
-  background: #ffebee;
-  color: #c62828;
-  display: inline-block;
-  padding: 0.4rem 0.8rem;
-  font-size: 1rem;
-  border-radius: 6px;
+.crct {
+  border-left: 4px solid #4caf50;
+}
+.wrong {
+  border-left: 4px solid #f44336;
 }
 
 /* RESPONSIVE */
-@media (max-width: 600px) {
-  body {
-    padding: 1rem;
+@media (max-width: 450px) {
+  .circle {
+    width: 160px;
+    height: 160px;
+  }
+  .circle svg {
+    width: 160px;
+    height: 160px;
   }
 
-  main {
+  header {
     padding: 1.5rem 1rem;
   }
 
-  header h1 {
+  .percent {
     font-size: 1.4rem;
-  }
-
-  header h2 {
-    font-size: 0.9rem;
-  }
-
-  main > div {
-    padding: 1rem;
-  }
-
-  #innerDiv span {
-    top: -22px;
-    font-size: 0.75rem;
   }
 }
